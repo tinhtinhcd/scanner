@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Quick Scanner</string>
+
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="my_form">My \n Form</string>
+    <string name="result">Result:</string>
+
+</resources>

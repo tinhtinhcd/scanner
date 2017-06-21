@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10px">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/red_border">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="2"
+            android:id="@+id/scanner_holder"
+            android:orientation="horizontal">
+            <com.journeyapps.barcodescanner.CompoundBarcodeView
+                android:id="@+id/zxing_barcode_scanner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:zxing_scanner_layout="@layout/custom_barcode_scanner">
+            </com.journeyapps.barcodescanner.CompoundBarcodeView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:padding="10dp"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/colorAccent"
+                android:text="@string/result"/>
+            <TextView
+                android:visibility="gone"
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="all"
+                android:id="@+id/qr_res"/>
+            <LinearLayout
+                android:visibility="gone"
+                android:padding="5px"
+                android:orientation="vertical"
+                android:id="@+id/contact_holder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
