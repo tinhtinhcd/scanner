@@ -16,6 +16,8 @@ public class MainActivity extends BaseActivity {
 
     FragmentManager     fragmentManager;
     FragmentTransaction fragmentTransaction;
+    ScannerFragment scannerFragment;
+    HistoryFragment historyFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +36,7 @@ public class MainActivity extends BaseActivity {
 
     private void loadFragment(Fragment fragment){
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_fragments, fragment, null);
-        fragmentTransaction.commit();
+        fragmentTransaction.replace(R.id.frame_fragments, fragment, null).commit();
     }
 
     @Override
@@ -49,11 +50,13 @@ public class MainActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.scanner_menu:
-                ScannerFragment scannerFragment = new ScannerFragment();
+                if(scannerFragment == null)
+                 scannerFragment = new ScannerFragment();
                 loadFragment(scannerFragment);
                 return true;
             case R.id.history_menu:
-                HistoryFragment historyFragment = new HistoryFragment();
+                if(historyFragment == null)
+                 historyFragment = new HistoryFragment();
                 loadFragment(historyFragment);
                 return true;
             default:
