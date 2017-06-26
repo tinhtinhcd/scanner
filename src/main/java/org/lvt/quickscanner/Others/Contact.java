@@ -1,5 +1,7 @@
 package org.lvt.quickscanner.Others;
 
+import java.util.List;
+
 /**
  * Created by ylt1hc on 6/19/2017.
  */
@@ -8,13 +10,35 @@ public class Contact {
     String Type;
     String Name;
     String Org;
-    String Tel;
-    String Url;
-    String Email;
-    String Adr;
+    String     Title;
+    List<Item> Tel;
+    String     Url;
+    List<Item> Email;
+    List<Item> Adr;
+    String     Note;
 
     public Contact(String recode){
         parseContact(recode);
+    }
+
+    public String getTitle() {
+        return Title;
+    }
+
+    public void setTitle(String title) {
+        Title = title;
+    }
+
+    public void setTel(List<Item> tel) {
+        Tel = tel;
+    }
+
+    public void setEmail(List<Item> email) {
+        Email = email;
+    }
+
+    public void setAdr(List<Item> adr) {
+        Adr = adr;
     }
 
     public String getNote() {
@@ -49,13 +73,6 @@ public class Contact {
         Org = org;
     }
 
-    public String getTel() {
-        return Tel;
-    }
-
-    public void setTel(String tel) {
-        Tel = tel;
-    }
 
     public String getUrl() {
         return Url;
@@ -65,25 +82,15 @@ public class Contact {
         Url = url;
     }
 
-    public String getEmail() {
-        return Email;
+
+    class Item{
+        String type;
+        String value;
+        public Item(String type, String value){
+            this.type = type;
+            this.value = value;
+        }
     }
-
-    public void setEmail(String email) {
-        Email = email;
-    }
-
-    public String getAdr() {
-        return Adr;
-    }
-
-    public void setAdr(String adr) {
-        Adr = adr;
-    }
-
-    String Note;
-
-
 
     public static boolean isContact(String string){
         return string.contains("BEGIN:")&&string.contains("N:");
@@ -110,7 +117,7 @@ public class Contact {
             }
             else if(tokens[i].startsWith("TEL:"))
             {
-                Tel= tokens[i].substring(4);
+//                Tel= tokens[i].substring(4);
             }
             else if(tokens[i].startsWith("URL:"))
             {
@@ -118,11 +125,11 @@ public class Contact {
             }
             else if(tokens[i].startsWith("EMAIL:"))
             {
-                Email= tokens[i].substring(6);
+//                Email= tokens[i].substring(6);
             }
             else if(tokens[i].startsWith("ADR:"))
             {
-                Adr= tokens[i].substring(4);
+//                Adr= tokens[i].substring(4);
             }
             else if(tokens[i].startsWith("NOTE:"))
             {

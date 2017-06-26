@@ -8,16 +8,12 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.lvt.quickscanner.Database.RecordEntity;
 import org.lvt.quickscanner.Database.RecordRepository;
-import org.lvt.quickscanner.Others.Contact;
 import org.lvt.quickscanner.Others.CustomAdapter;
-import org.lvt.quickscanner.Others.Type;
 import org.lvt.quickscanner.R;
 
 import java.util.List;
@@ -48,15 +44,15 @@ public class HistoryFragment extends BaseFragment {
 
     private void initView(View view){
         listView = (ListView) view.findViewById(R.id.listView);
-        customAdapter = new CustomAdapter(getActivity().getBaseContext(),recordEntities);
+        customAdapter = new CustomAdapter(getActivity(),recordEntities);
         listView.setAdapter(customAdapter);
         listView.setItemsCanFocus(false);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                showViewItem(position);
-            }
-        });
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                showViewItem(position);
+//            }
+//        });
         FloatingActionButton floatingActionButton = (FloatingActionButton) view.findViewById(R.id.delete);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,36 +62,7 @@ public class HistoryFragment extends BaseFragment {
         });
     }
 
-    private void showViewItem(int position){
-        final Dialog dialog = new Dialog(getActivity());
-        RecordEntity item   = recordEntities.get(position);
-        if(Contact.isContact(item.getContent()) && Type.CONTACT.equals(item.getType())){
-            dialog.setContentView(R.layout.contact);
-            Contact contact = new Contact(item.getContent());
 
-            TextView type = (TextView) dialog.findViewById(R.id.type);
-            TextView name = (TextView) dialog.findViewById(R.id.name);
-            TextView org = (TextView) dialog.findViewById(R.id.org);
-            TextView tel = (TextView) dialog.findViewById(R.id.tel);
-            TextView url = (TextView) dialog.findViewById(R.id.url);
-            TextView email = (TextView) dialog.findViewById(R.id.email);
-            TextView adr = (TextView) dialog.findViewById(R.id.adr);
-
-            type.setText(contact.getType());
-            name.setText(contact.getName());
-            org.setText(contact.getOrg());
-            tel.setText(contact.getTel());
-            url.setText(contact.getUrl());
-            email.setText(contact.getEmail());
-            adr.setText(contact.getAdr());
-
-        }else{
-            dialog.setContentView(R.layout.recode);
-            TextView recode = (TextView) dialog.findViewById(R.id.recode);
-            recode.setText(item.getContent());
-        }
-        dialog.show();
-    }
 
     private void showDeleteDialog(){
         final Dialog dialog = new Dialog(getActivity());
@@ -120,7 +87,7 @@ public class HistoryFragment extends BaseFragment {
                 customAdapter.checked.toArray(ids);
                 recordRepository.delete(customAdapter.checked.toArray(ids));
                 recordEntities = recordRepository.get();
-                customAdapter = new CustomAdapter(getActivity().getBaseContext(),recordEntities);
+                customAdapter = new CustomAdapter(getActivity(),recordEntities);
                 listView.setAdapter(customAdapter);
                 listView.invalidate();
                 dialog.dismiss();

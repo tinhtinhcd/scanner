@@ -1,9 +1,12 @@
 package org.lvt.quickscanner.Others;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -89,9 +92,48 @@ public class CustomAdapter extends BaseAdapter{
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MMM/yyyy HH:mm:ss");
             date.setText(simpleDateFormat.format(recordEntities.get(position).getRecordDate()));
 
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showViewItem(position);
+                }
+            });
+
         } catch (Exception e){
             e.printStackTrace();
         }
         return convertView;
+    }
+
+    private void showViewItem(int position){
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        RecordEntity item   = recordEntities.get(position);
+//        if(Contact.isContact(item.getContent())){
+//            dialog.setContentView(R.layout.contact);
+//            Contact contact = new Contact(item.getContent());
+//            TextView type = (TextView) dialog.findViewById(R.id.type);
+//            TextView name = (TextView) dialog.findViewById(R.id.name);
+//            TextView org = (TextView) dialog.findViewById(R.id.org);
+//            TextView tel = (TextView) dialog.findViewById(R.id.tel);
+//            TextView url = (TextView) dialog.findViewById(R.id.url);
+//            TextView email = (TextView) dialog.findViewById(R.id.email);
+//            TextView adr = (TextView) dialog.findViewById(R.id.adr);
+//
+//            type.setText(contact.getType());
+//            name.setText(contact.getName());
+//            org.setText(contact.getOrg());
+//            tel.setText(contact.getTel());
+//            url.setText(contact.getUrl());
+//            email.setText(contact.getEmail());
+//            adr.setText(contact.getAdr());
+
+//        }else{
+            dialog.setContentView(R.layout.recode);
+            TextView recode = (TextView) dialog.findViewById(R.id.recode);
+            recode.setText(item.getContent());
+//        }
+        Log.e("content:",item.getContent());
+        dialog.show();
     }
 }
