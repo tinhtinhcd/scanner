@@ -44,7 +44,6 @@ public class RecordRepository {
             entity.setId(cursor.getInt(cursor.getColumnIndexOrThrow(RecordEntity._id)));
             entity.setContent(cursor.getString(cursor.getColumnIndexOrThrow(RecordEntity.column_content)));
             entity.setType(cursor.getInt(cursor.getColumnIndexOrThrow(RecordEntity._id)));
-            Log.e("date: ", ""+cursor.getInt(cursor.getColumnIndexOrThrow(RecordEntity.column_record_date)));
             entity.setRecordDate(new Date(Long.parseLong(cursor.getString(cursor.getColumnIndexOrThrow(RecordEntity.column_record_date)))));
             recordEntities.add(entity);
         }

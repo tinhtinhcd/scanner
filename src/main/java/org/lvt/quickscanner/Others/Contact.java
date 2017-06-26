@@ -13,6 +13,10 @@ public class Contact {
     String Email;
     String Adr;
 
+    public Contact(String recode){
+        parseContact(recode);
+    }
+
     public String getNote() {
         return Note;
     }

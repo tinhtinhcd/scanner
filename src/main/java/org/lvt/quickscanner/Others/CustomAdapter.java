@@ -80,8 +80,7 @@ public class CustomAdapter extends BaseAdapter{
 
             String recode = recordEntities.get(position).getContent();
             if(Contact.isContact(recode)){
-                Contact contact = new Contact();
-                contact.parseContact(recode);
+                Contact contact = new Contact(recode);
                 content.setText(contact.getType() + ": " + contact.getName());
             }
             else {

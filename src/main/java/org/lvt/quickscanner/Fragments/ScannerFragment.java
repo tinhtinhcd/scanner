@@ -64,8 +64,7 @@ public class ScannerFragment extends BaseFragment {
         String contents = result.getText();
         Type   type     = Type.TEXT;
         if(contents.startsWith("BEGIN:")){
-            Contact contact = new Contact();
-            contact.parseContact(contents);
+            Contact contact = new Contact(contents);
             qrText.setVisibility(View.GONE);
             contactHolder.setVisibility(View.VISIBLE);
             type = Type.CONTACT;
