@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import org.lvt.quickscanner.Database.RecordEntity;
@@ -34,7 +36,7 @@ public class CustomAdapter extends BaseAdapter{
 
     public void setChecked(RecordEntity entity){
         if (checked.contains(entity.getId()))
-            checked.remove(entity.getId());
+            checked.remove(checked.indexOf(entity.getId()));
         else
             checked.add(entity.getId());
     }
@@ -55,7 +57,7 @@ public class CustomAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         try {
 
             if (convertView == null) {
@@ -65,6 +67,16 @@ public class CustomAdapter extends BaseAdapter{
 
             TextView content = (TextView) convertView.findViewById(R.id.record_content);
             TextView date    = (TextView) convertView.findViewById(R.id.record_date);
+            CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);
+
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(isChecked){
+                        setChecked(recordEntities.get(position));
+                    }
+                }
+            });
 
             content.setText(recordEntities.get(position).getContent());
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MMM/yyyy HH:mm:ss");

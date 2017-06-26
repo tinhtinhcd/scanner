@@ -4,16 +4,21 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
+    <CheckBox
+        android:gravity="center"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkBox"
+        android:layout_gravity="right"/>
     <LinearLayout
-        android:layout_marginRight="60px"
+        android:layout_marginLeft="60px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
             android:autoLink="all"
             android:singleLine="true"
             android:id="@+id/record_content"/>
@@ -22,14 +27,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Text"
+            android:textStyle="italic"
+            android:textSize="8sp"
             android:id="@+id/record_date"/>
     </LinearLayout>
 
-    <CheckBox
-        android:gravity="center"
-        android:layout_alignParentRight="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkBox"
-        android:layout_gravity="right"/>
 </RelativeLayout>

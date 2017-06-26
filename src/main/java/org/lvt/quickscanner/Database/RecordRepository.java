@@ -63,7 +63,10 @@ public class RecordRepository {
     public void delete(Integer[] ids){
         if(ids.length>0){
             sqLiteDatabase = dataHelper.getWritableDatabase();
-                sqLiteDatabase.delete(RecordEntity.table, RecordEntity._id + " in (?)", Arrays.toString(ids).split("[\\[\\]]")[1].split(", "));
+            String[] args = Arrays.toString(ids).split("[\\[\\]]")[1].split(", ");
+            for (String arg:args) {
+                sqLiteDatabase.delete(RecordEntity.table, RecordEntity._id + " = "+arg, null);
+            }
         }else{
             deleteAll();
         }
