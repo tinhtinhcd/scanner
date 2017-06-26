@@ -12,7 +12,78 @@ public class Contact {
     String Url;
     String Email;
     String Adr;
+
+    public String getNote() {
+        return Note;
+    }
+
+    public void setNote(String note) {
+        Note = note;
+    }
+
+    public String getType() {
+        return Type;
+    }
+
+    public void setType(String type) {
+        Type = type;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public String getOrg() {
+        return Org;
+    }
+
+    public void setOrg(String org) {
+        Org = org;
+    }
+
+    public String getTel() {
+        return Tel;
+    }
+
+    public void setTel(String tel) {
+        Tel = tel;
+    }
+
+    public String getUrl() {
+        return Url;
+    }
+
+    public void setUrl(String url) {
+        Url = url;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+    public String getAdr() {
+        return Adr;
+    }
+
+    public void setAdr(String adr) {
+        Adr = adr;
+    }
+
     String Note;
+
+
+
+    public static boolean isContact(String string){
+        return string.contains("BEGIN:")&&string.contains("N:");
+    }
 
     public Contact parseContact(String contact){
         String[] tokens = contact.split("\n");
@@ -56,4 +127,5 @@ public class Contact {
         }
         return this;
     }
+
 }

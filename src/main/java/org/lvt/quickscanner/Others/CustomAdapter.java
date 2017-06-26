@@ -78,7 +78,15 @@ public class CustomAdapter extends BaseAdapter{
                 }
             });
 
-            content.setText(recordEntities.get(position).getContent());
+            String recode = recordEntities.get(position).getContent();
+            if(Contact.isContact(recode)){
+                Contact contact = new Contact();
+                contact.parseContact(recode);
+                content.setText(contact.getType() + ": " + contact.getName());
+            }
+            else {
+                content.setText(recode);
+            }
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MMM/yyyy HH:mm:ss");
             date.setText(simpleDateFormat.format(recordEntities.get(position).getRecordDate()));
 
