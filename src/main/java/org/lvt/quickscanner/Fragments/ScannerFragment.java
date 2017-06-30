@@ -17,7 +17,6 @@ import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.CompoundBarcodeView;
 
 import org.lvt.quickscanner.Database.RecordRepository;
-import org.lvt.quickscanner.Others.Contact;
 import org.lvt.quickscanner.Others.Type;
 import org.lvt.quickscanner.R;
 
@@ -64,7 +63,6 @@ public class ScannerFragment extends BaseFragment {
         String contents = result.getText();
         Type   type     = Type.TEXT;
         if(contents.startsWith("BEGIN:")){
-            Contact contact = new Contact(contents);
             qrText.setVisibility(View.GONE);
             contactHolder.setVisibility(View.VISIBLE);
             type = Type.CONTACT;
