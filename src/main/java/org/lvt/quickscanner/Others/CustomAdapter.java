@@ -19,6 +19,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import ezvcard.Ezvcard;
+import ezvcard.VCard;
+
 /**
  * Created by ylt1hc on 6/19/2017.
  */
@@ -82,13 +85,14 @@ public class CustomAdapter extends BaseAdapter{
             });
 
             String recode = recordEntities.get(position).getContent();
-            if(Contact.isContact(recode)){
-                Contact contact = new Contact(recode);
-                content.setText(contact.getType() + ": " + contact.getName());
-            }
-            else {
-                content.setText(recode);
-            }
+//            if(Contact.isContact(recode)){
+//                Contact contact = new Contact(recode);
+//                content.setText(contact.getType() + ": " + contact.getName());
+//            }
+//            else {
+//                content.setText(recode);
+//            }
+            content.setText(recode);
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MMM/yyyy HH:mm:ss");
             date.setText(simpleDateFormat.format(recordEntities.get(position).getRecordDate()));
 
@@ -109,31 +113,37 @@ public class CustomAdapter extends BaseAdapter{
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         RecordEntity item   = recordEntities.get(position);
-//        if(Contact.isContact(item.getContent())){
-//            dialog.setContentView(R.layout.contact);
-//            Contact contact = new Contact(item.getContent());
-//            TextView type = (TextView) dialog.findViewById(R.id.type);
-//            TextView name = (TextView) dialog.findViewById(R.id.name);
-//            TextView org = (TextView) dialog.findViewById(R.id.org);
-//            TextView tel = (TextView) dialog.findViewById(R.id.tel);
-//            TextView url = (TextView) dialog.findViewById(R.id.url);
-//            TextView email = (TextView) dialog.findViewById(R.id.email);
-//            TextView adr = (TextView) dialog.findViewById(R.id.adr);
-//
-//            type.setText(contact.getType());
-//            name.setText(contact.getName());
-//            org.setText(contact.getOrg());
-//            tel.setText(contact.getTel());
-//            url.setText(contact.getUrl());
-//            email.setText(contact.getEmail());
-//            adr.setText(contact.getAdr());
 
-//        }else{
+        String content = item.getContent();
+
+        if(isVCard(content)||isMeCard(content)){
+            dialog.setContentView(R.layout.contact);
+            TextView type = (TextView) dialog.findViewById(R.id.type);
+            TextView name = (TextView) dialog.findViewById(R.id.name);
+            TextView org = (TextView) dialog.findViewById(R.id.org);
+            TextView tel = (TextView) dialog.findViewById(R.id.tel);
+            TextView url = (TextView) dialog.findViewById(R.id.url);
+            TextView email = (TextView) dialog.findViewById(R.id.email);
+            TextView adr = (TextView) dialog.findViewById(R.id.adr);
+
+            if(isVCard(content)){
+                VCard vcard = Ezvcard.parseJson(item.getContent()).first();
+                type.setText("VCARD");
+            }
+
+        }else{
             dialog.setContentView(R.layout.recode);
             TextView recode = (TextView) dialog.findViewById(R.id.recode);
-            recode.setText(item.getContent());
-//        }
-        Log.e("content:",item.getContent());
+            recode.setText(content);
+        }
+        Log.e("content:",content);
         dialog.show();
+    }
+
+    private boolean isVCard(String values){
+        return (values.contains("BEGIN:VCARD")&&values.contains("END:VCARD"));
+    }
+    private boolean isMeCard(String values){
+        return values.contains("MECARD");
     }
 }

@@ -3,7 +3,8 @@
                 android:gravity="center"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-    >
+                android:focusable="false"
+                android:focusableInTouchMode="false">
 
     <CheckBox
         android:gravity="center"
@@ -16,13 +17,17 @@
         android:layout_marginLeft="60px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:focusable="false"
+        android:focusableInTouchMode="false">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:autoLink="all"
             android:singleLine="true"
-            android:id="@+id/record_content"/>
+            android:id="@+id/record_content"
+            android:focusable="false"
+            android:focusableInTouchMode="false"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,7 +35,9 @@
             android:text="New Text"
             android:textStyle="italic"
             android:textSize="8sp"
-            android:id="@+id/record_date"/>
+            android:id="@+id/record_date"
+            android:focusable="false"
+            android:focusableInTouchMode="false"/>
     </LinearLayout>
 
 </RelativeLayout>
