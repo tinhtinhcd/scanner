@@ -31,12 +31,12 @@ public class MainActivity extends BaseActivity {
 
         fragmentManager = getFragmentManager();
         ScannerFragment scannerFragment = new ScannerFragment();
-        loadFragment(scannerFragment);
+        loadFragment(scannerFragment, "scan");
     }
 
-    private void loadFragment(Fragment fragment){
+    private void loadFragment(Fragment fragment, String tag){
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_fragments, fragment, null).commit();
+        fragmentTransaction.replace(R.id.frame_fragments, fragment, tag).commit();
     }
 
     @Override
@@ -52,15 +52,16 @@ public class MainActivity extends BaseActivity {
             case R.id.scanner_menu:
                 if(scannerFragment == null)
                  scannerFragment = new ScannerFragment();
-                loadFragment(scannerFragment);
+                loadFragment(scannerFragment, "scan");
                 return true;
             case R.id.history_menu:
                 if(historyFragment == null)
                  historyFragment = new HistoryFragment();
-                loadFragment(historyFragment);
+                loadFragment(historyFragment, "his");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
 }

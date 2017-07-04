@@ -129,6 +129,9 @@ public class CustomAdapter extends BaseAdapter{
             if(isVCard(content)){
                 VCard vcard = Ezvcard.parseJson(item.getContent()).first();
                 type.setText("VCARD");
+
+                TextView recode = (TextView) dialog.findViewById(R.id.recode);
+                recode.setText(content);
             }
 
         }else{
@@ -144,6 +147,6 @@ public class CustomAdapter extends BaseAdapter{
         return (values.contains("BEGIN:VCARD")&&values.contains("END:VCARD"));
     }
     private boolean isMeCard(String values){
-        return values.contains("MECARD");
+        return values.contains("MECARD:");
     }
 }
